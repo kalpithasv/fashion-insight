@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    fetch("http://localhost:8000/api/metrics")
+    fetch("https://fashion-insight-1.onrender.com/api/campaign")
         .then(res => res.json())
         .then(data => {
             document.querySelector(".average-rating").textContent = data.average_rating;
