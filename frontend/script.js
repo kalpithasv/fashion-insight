@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    fetch("https://fashion-insight-1.onrender.com/api/campaign")
+    fetch("https://fashion-insight-1.onrender.com/api/metrics")
         .then(res => res.json())
         .then(data => {
             document.querySelector(".average-rating").textContent = data.average_rating;
@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector(".positive-feedback").textContent = data.positive_feedback;
         });
 });
+
 
 // Campaign Generator
 function generateCampaign() {
@@ -24,6 +25,7 @@ function generateCampaign() {
             demographic: demographic
         })
     })
+    
     .then(res => res.json())
     .then(data => {
         document.getElementById("campaign-output").textContent = data.campaign_text;
