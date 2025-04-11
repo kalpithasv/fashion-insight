@@ -12,8 +12,13 @@ rf_model = joblib.load(os.path.join(BASE_DIR, "models", "rf_model.pkl"))
 vectorizer = joblib.load(os.path.join(BASE_DIR, "models", "vectorizer.pkl"))
 
 # Load GPT-2
-gpt2_tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-gpt2_model = GPT2LMHeadModel.from_pretrained("gpt2")
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+model = GPT2LMHeadModel.from_pretrained("gpt2")
+
+input_text = "Create a marketing campaign for fashion targeting young adults with keywords: comfortable, stylish."
+inputs = tokenizer.encode(input_text, return_tensors="pt")
+outputs = model.generate(inputs, max_length=100)
+print(tokenizer.decode(outputs[0]))
 
 # Clean the review text
 def clean_text(text):

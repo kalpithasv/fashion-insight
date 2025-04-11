@@ -31,16 +31,19 @@ def get_metrics():
 
 @app.post("/api/campaign")
 def campaign(req: CampaignRequest):
-    print("📩 /api/campaign hit")
-    print("🛬 Received request body:")
-    print("   ➤ product_category:", req.product_category)
-    print("   ➤ sentiment_keywords:", req.sentiment_keywords)
-    print("   ➤ demographic:", req.demographic)
+    try:
+        print("📩 /api/campaign hit")
+        print(f"Category: {req.product_category}, Keywords: {req.sentiment_keywords}, Demographic: {req.demographic}")
+        
+        result = generate_campaign(req.product_category, req.sentiment_keywords, req.demographic)
+        
+        print("✅ Campaign result:", result)
+        return {"campaign_text": result}
     
-    # Dummy response
-    return {
-        "campaign_text": f"Generated dummy campaign for {req.product_category}, targeting {req.demographic}, using keywords: {req.sentiment_keywords}"
-    }
+    except Exception as e:
+        print("❌ Exception:", str(e))
+        return {"campaign_text": "Campaign generation failed."}
+
 
 
 @app.post("/api/upload")
