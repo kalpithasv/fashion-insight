@@ -31,9 +31,16 @@ def get_metrics():
 
 @app.post("/api/campaign")
 def campaign(req: CampaignRequest):
-    print(f"📩 Received request: {req}")
-    return {"campaign_text": f"Dummy campaign for {req.product_category} targeting {req.demographic} with keywords {req.sentiment_keywords}"}
-
+    print("📩 /api/campaign hit")
+    print("🛬 Received request body:")
+    print("   ➤ product_category:", req.product_category)
+    print("   ➤ sentiment_keywords:", req.sentiment_keywords)
+    print("   ➤ demographic:", req.demographic)
+    
+    # Dummy response
+    return {
+        "campaign_text": f"Generated dummy campaign for {req.product_category}, targeting {req.demographic}, using keywords: {req.sentiment_keywords}"
+    }
 
 
 @app.post("/api/upload")
