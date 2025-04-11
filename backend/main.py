@@ -31,8 +31,14 @@ def get_metrics():
 
 @app.post("/api/campaign")
 def campaign(req: CampaignRequest):
-    text = generate_campaign(req.product_category, req.sentiment_keywords, req.demographic)
-    return {"campaign_text": text}
+    print(f"📩 Received request: {req}")
+    try:
+        text = generate_campaign(req.product_category, req.sentiment_keywords, req.demographic)
+        print(f"📦 Generated campaign text: {text}")
+        return {"campaign_text": text}
+    except Exception as e:
+        print(f"❌ Error: {e}")
+        return {"campaign_text": "Campaign generation failed."}
 
 @app.post("/api/upload")
 async def upload_data(file: UploadFile = File(...)):
