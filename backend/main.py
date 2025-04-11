@@ -32,25 +32,8 @@ def get_metrics():
 @app.post("/api/campaign")
 def campaign(req: CampaignRequest):
     print(f"📩 Received request: {req}")
-    try:
-        # Log inputs
-        print(f"Product Category: {req.product_category}")
-        print(f"Sentiment Keywords: {req.sentiment_keywords}")
-        print(f"Demographic: {req.demographic}")
+    return {"campaign_text": f"Dummy campaign for {req.product_category} targeting {req.demographic} with keywords {req.sentiment_keywords}"}
 
-        # Call the generate_campaign function from the model module
-        text = generate_campaign(req.product_category, req.sentiment_keywords, req.demographic)
-        
-        # Log the generated campaign text
-        print(f"📦 Generated campaign text: {text}")
-        
-        # Return the response
-        return {"campaign_text": text}
-    
-    except Exception as e:
-        # Log the error and return a failure message
-        print(f"❌ Error: {e}")
-        return {"campaign_text": "Campaign generation failed."}
 
 
 @app.post("/api/upload")
