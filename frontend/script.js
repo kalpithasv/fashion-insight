@@ -15,7 +15,7 @@ function generateCampaign() {
     const keywords = document.getElementById("keywords").value;
     const demographic = document.getElementById("demographic").value;
 
-    fetch("http://localhost:8000/api/campaign", {
+    fetch("https://fashion-insight-1.onrender.com/api/campaign", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
