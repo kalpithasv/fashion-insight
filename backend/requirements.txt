@@ -5,5 +5,5 @@ numpy
 scikit-learn
 nltk
 transformers
-torch==2.2.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
+torch>=2.2,<2.3
 python-multipart
