@@ -39,22 +39,20 @@ def predict_trends(df):
 # Generate campaign using GPT-2
 def generate_campaign(product_category, sentiment_keywords, demographic):
     try:
-        prompt = (
-            f"Our {product_category} collection is perfect for {demographic}. "
-            f"Featuring {sentiment_keywords}, it's designed for both style and comfort."
-        )
-        inputs = gpt2_tokenizer.encode(prompt, return_tensors="pt")
-        output = gpt2_model.generate(
-            inputs,
-            max_length=50,
-            top_p=0.9,
-            temperature=0.9,
-            do_sample=True,
-            pad_token_id=gpt2_tokenizer.eos_token_id
-        )
-        result = gpt2_tokenizer.decode(output[0], skip_special_tokens=True)
-        return result
-    except Exception as e:
-        print(f"🔥 Error generating campaign: {e}")
-        return "Shop our latest styles, designed just for you."
+        # You might need to combine the inputs in a meaningful way for GPT-2
+        input_text = f"Create a marketing campaign for a {product_category} targeting {demographic}. Use keywords: {sentiment_keywords}."
 
+        # Tokenize and encode the input
+        inputs = gpt2_tokenizer.encode(input_text, return_tensors='pt')
+
+        # Generate text using GPT-2 model
+        outputs = gpt2_model.generate(inputs, max_length=200, num_return_sequences=1)
+
+        # Decode the generated text
+        campaign_text = gpt2_tokenizer.decode(outputs[0], skip_special_tokens=True)
+        
+        return campaign_text
+
+    except Exception as e:
+        print(f"❌ Error in generate_campaign: {e}")
+        raise
